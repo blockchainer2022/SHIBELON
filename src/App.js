@@ -202,7 +202,7 @@ const App = () => {
         open={lessMintAmountAlert}
         onClose={setLessMintAmountAlert}
         title="Oops"
-        text="Atleast 1 SHIBELON should be minted"
+        text="Atleast 1  Shib Elon should be minted"
       />
       <InformationModal
         open={accessAccountDenied}
@@ -244,7 +244,7 @@ const App = () => {
         open={switchToMainnet}
         onClose={setswitchToMainnet}
         title="Error"
-        text="Please switch to mainnet to mint SHIBELON"
+        text="Please switch to mainnet to mint  Shib Elon"
       />
       <InformationModal
         open={ethereumCompatibleBrowser}

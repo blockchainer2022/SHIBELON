@@ -90,7 +90,7 @@ const TopSection = ({
               </div>
 
               <p className="slider-below-text">
-                Buy {value} SHIBELON{" "}
+                Buy {value} Shib Elon{" "}
                 <span className="big-font">
                   {(value * price).toFixed(4)} Ether
                 </span>
@@ -117,7 +117,7 @@ const TopSection = ({
                   }
                   disabled={!account ? true : false}
                 >
-                  {totalSupply === 2000 ? "All Sold" : "Mint SHIBELON"}
+                  {totalSupply === 2000 ? "All Sold" : "Mint  Shib Elon"}
                 </Button>
                 <br />
                 <span
@@ -137,7 +137,7 @@ const TopSection = ({
               </div>
 
               <p>
-                Total SHIBELON Sold{" "}
+                Total Shib Elon Sold{" "}
                 <span className="linebreak">
                   {totalSupply}/{maxSupply}
                 </span>
