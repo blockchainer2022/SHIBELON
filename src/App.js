@@ -66,7 +66,7 @@ const App = () => {
     // you are connected to main net
     // Please connect to main net
 
-    if (chainId === 4) {
+    if (chainId === 1) {
       toast(`You are connected to main net`, {
         type: "success",
         position: toast.POSITION.BOTTOM_CENTER,
@@ -124,7 +124,7 @@ const App = () => {
 
   async function mint(mintCount) {
     if (contract) {
-      if (chainId === 4) {
+      if (chainId === 1) {
         const saleOpen = await contract.methods.saleOpen().call();
         if (saleOpen) {
           if (mintCount === 0) {
