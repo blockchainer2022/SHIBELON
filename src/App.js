@@ -30,7 +30,7 @@ const App = () => {
   const [mintingInProgress, setMintingInProgress] = useState(false);
   const [confirmTransaction, setConfirmTransaction] = useState(false);
   const [saleLive, setSaleLive] = useState(false);
-
+  const [lessBalance, setLessBalance] = useState(false);
   async function loadWeb3() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -81,7 +81,7 @@ const App = () => {
       const MAX_SUPPlY = await contract.methods.MAX_SUPPLY().call();
       // console.log("MAX_SUPPLY:", MAX_SUPPlY);
       setMaxSupply(MAX_SUPPlY);
-
+      // const balance = web3.eth.getBalance()
       //event will be fired by the smart contract when a new NFT is minted
       contract.events
         .NFTMinted()
@@ -130,38 +130,49 @@ const App = () => {
           if (mintCount === 0) {
             setLessMintAmountAlert(true);
           } else {
-            setConfirmTransaction(true);
-            const finalPrice = Number(price) * mintCount;
-            contract.methods
-              .mintNFT(mintCount)
-              .send({ from: account, value: finalPrice })
-              .on("transactionHash", function () {
-                setConfirmTransaction(false);
-                setMintingInProgress(true);
-              })
-              .on("confirmation", function () {
-                const el = document.createElement("div");
-                el.innerHTML =
-                  "View minted NFT on OpenSea : <a href='https://testnets.opensea.io/account '>View Now</a>";
+            const balance = await window.web3.eth.getBalance(account);
+            const convertBalance = window.web3.utils.fromWei(balance, "ether");
+            const convertPrice = window.web3.utils.fromWei(price, "ether");
+            console.log(convertBalance, convertPrice);
+            const totalPrice = convertPrice * mintCount;
+            // console.log(totalPrice < convertBalance);
+            const isSufficientBalance = totalPrice < Number(convertBalance);
+            if (isSufficientBalance) {
+              setConfirmTransaction(true);
+              const finalPrice = Number(price) * mintCount;
+              contract.methods
+                .mintNFT(mintCount)
+                .send({ from: account, value: finalPrice })
+                .on("transactionHash", function () {
+                  setConfirmTransaction(false);
+                  setMintingInProgress(true);
+                })
+                .on("confirmation", function () {
+                  const el = document.createElement("div");
+                  el.innerHTML =
+                    "View minted NFT on OpenSea : <a href='https://testnets.opensea.io/account '>View Now</a>";
 
-                setNftMinted(true);
-                setConfirmTransaction(false);
-                setMintingInProgress(false);
-                setTimeout(() => {
-                  window.location.reload(false);
-                }, 5000);
-              })
-              .on("error", function (error, receipt) {
-                if (error.code === 4001) {
-                  setTransactionRejected(true);
+                  setNftMinted(true);
                   setConfirmTransaction(false);
                   setMintingInProgress(false);
-                } else {
-                  setTransactionFailed(true);
-                  setConfirmTransaction(false);
-                  setMintingInProgress(false);
-                }
-              });
+                  setTimeout(() => {
+                    window.location.reload(false);
+                  }, 5000);
+                })
+                .on("error", function (error, receipt) {
+                  if (error.code === 4001) {
+                    setTransactionRejected(true);
+                    setConfirmTransaction(false);
+                    setMintingInProgress(false);
+                  } else {
+                    setTransactionFailed(true);
+                    setConfirmTransaction(false);
+                    setMintingInProgress(false);
+                  }
+                });
+            } else {
+              setLessBalance(true);
+            }
           }
         } else {
           setSaleLive(true);
@@ -245,6 +256,12 @@ const App = () => {
         onClose={setswitchToMainnet}
         title="Error"
         text="Please switch to mainnet to mint  SHIBELON"
+      />
+      <InformationModal
+        open={lessBalance}
+        onClose={setLessBalance}
+        title="Error"
+        text="You don't have enough ETH Balance!"
       />
       <InformationModal
         open={ethereumCompatibleBrowser}
