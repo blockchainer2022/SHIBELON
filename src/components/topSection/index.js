@@ -75,7 +75,7 @@ const TopSection = ({
                 </button>
               </div>
 
-              <div className="topsection-slider-wrapper">
+              {/* <div className="topsection-slider-wrapper">
                 <PrettoSlider
                   value={value}
                   min={1}
@@ -87,13 +87,17 @@ const TopSection = ({
                   onChange={handleChange}
                   className="slidercustome"
                 />
-              </div>
+              </div> */}
 
-              <p className="slider-below-text">
-                Buy {value} SHIBELON{" "}
+              <p
+                className="slider-below-text"
+                style={{ margin: "30px 0", textAlign: "center" }}
+              >
+                {/* Buy {value} SHIBELON{" "}
                 <span className="big-font">
                   {(value * price).toFixed(4)} Ether
-                </span>
+                </span> */}
+                Claim Your Free SHIBELON
               </p>
 
               <div className="mint-buton-wrapper">
@@ -117,7 +121,9 @@ const TopSection = ({
                   }
                   disabled={!account ? true : false}
                 >
-                  {totalSupply === 2000 ? "All Sold" : "Mint  SHIBELON"}
+                  {totalSupply === 2000
+                    ? "All CLAIMED"
+                    : "CLAIM FREE SHIBELONs"}
                 </Button>
                 <br />
                 <span
@@ -132,12 +138,12 @@ const TopSection = ({
                       : { display: "none" }
                   }
                 >
-                  Connect Wallet to Buy NFT
+                  Connect Wallet to Claim NFT
                 </span>
               </div>
 
               <p>
-                Total SHIBELON Sold{" "}
+                Total SHIBELON Claimed{" "}
                 <span className="linebreak">
                   {totalSupply}/{maxSupply}
                 </span>

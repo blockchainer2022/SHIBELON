@@ -66,7 +66,7 @@ const App = () => {
     // you are connected to main net
     // Please connect to main net
 
-    if (chainId === 1) {
+    if (chainId === 4) {
       toast(`You are connected to main net`, {
         type: "success",
         position: toast.POSITION.BOTTOM_CENTER,
@@ -124,17 +124,22 @@ const App = () => {
 
   async function mint(mintCount) {
     if (contract) {
-      if (chainId === 1) {
-        const saleOpen = await contract.methods.saleOpen().call();
-        if (saleOpen) {
-          if (mintCount === 0) {
+      if (chainId === 4) {
+        // const saleOpen = await contract.methods.saleOpen().call();
+        const isEligible = await contract.methods
+          .freeClaimEligible()
+          .call({ from: account });
+
+        console.log("ELIGIBLE:", isEligible);
+        if (isEligible) {
+          if (false) {
             setLessMintAmountAlert(true);
           } else {
             setConfirmTransaction(true);
-            const finalPrice = Number(price) * mintCount;
+            // const finalPrice = Number(price) * mintCount;
             contract.methods
-              .mintNFT(mintCount)
-              .send({ from: account, value: finalPrice })
+              .claimNFT()
+              .send({ from: account })
               .on("transactionHash", function () {
                 setConfirmTransaction(false);
                 setMintingInProgress(true);
@@ -195,8 +200,8 @@ const App = () => {
       <InformationModal
         open={saleLive}
         onClose={setSaleLive}
-        title=" Sale is not live"
-        text="Sale is not live yet. Please follow our discord for the updates"
+        title="Not Eligible"
+        text="Oops you are not eligible for free claim!"
       />
       <InformationModal
         open={lessMintAmountAlert}
@@ -219,14 +224,14 @@ const App = () => {
       <InformationModal
         open={nftMinted}
         onClose={setNftMinted}
-        title="Mint Successful"
+        title="Claimed Successful"
         text="Thank you for the purchase. Your NFT will be available on OpenSea shortly"
       />
       <InformationModal
         open={nftMinting}
         onClose={setNftMinting}
         title="Information"
-        text="Minting NFT!"
+        text="Claiming NFT!"
       />
       <InformationModal
         open={transactionRejected}
@@ -244,7 +249,7 @@ const App = () => {
         open={switchToMainnet}
         onClose={setswitchToMainnet}
         title="Error"
-        text="Please switch to mainnet to mint  SHIBELON"
+        text="Please switch to mainnet to Claim SHIBELON"
       />
       <InformationModal
         open={ethereumCompatibleBrowser}
@@ -255,11 +260,11 @@ const App = () => {
       <ConfirmationLoadingPopup
         open={confirmTransaction}
         title="Confirm Transaction"
-        message="Confirm transaction to mint the NFT"
+        message="Confirm transaction to Claim the NFT"
       />
       <ConfirmationLoadingPopup
         open={mintingInProgress}
-        title="Minting In Progress"
+        title="Claiming In Progress"
         message="Please wait to get confirmation of the transaction from blockchain"
       />
     </>
