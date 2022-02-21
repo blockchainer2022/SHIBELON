@@ -98,6 +98,13 @@ export const contractAbi = [
   },
   {
     inputs: [],
+    name: "FREECLAIM_RESERVED",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "MAX_ALLOWED",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
@@ -105,28 +112,7 @@ export const contractAbi = [
   },
   {
     inputs: [],
-    name: "MAX_ALLOWED_PRESALE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "MAX_SUPPLY",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "OWNER_RESERVED",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "PRESALE_RESERVED",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -181,6 +167,27 @@ export const contractAbi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "claimNFT",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "freeClaim",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "freeClaimEligible",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
     name: "getApproved",
     outputs: [{ internalType: "address", name: "", type: "address" }],
@@ -201,6 +208,13 @@ export const contractAbi = [
     ],
     name: "isApprovedForAll",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "mintCount",
+    outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
     stateMutability: "view",
     type: "function",
   },
@@ -234,7 +248,7 @@ export const contractAbi = [
   },
   {
     inputs: [],
-    name: "pausePreSale",
+    name: "pauseFreeCalim",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -244,27 +258,6 @@ export const contractAbi = [
     name: "pauseSale",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint16", name: "_count", type: "uint16" }],
-    name: "presaleMintNFT",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "presaleOpen",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "presaleWhiteListRequired",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -336,15 +329,6 @@ export const contractAbi = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "uint256", name: "_maxAllowedPresale", type: "uint256" },
-    ],
-    name: "setMaxAllowdPresale",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [{ internalType: "uint256", name: "_max_supply", type: "uint256" }],
     name: "setMaxSupply",
     outputs: [],
@@ -352,28 +336,8 @@ export const contractAbi = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "uint256", name: "_ownerReserved", type: "uint256" },
-    ],
-    name: "setOwnerReserved",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "uint256", name: "_presale_reserved", type: "uint256" },
-    ],
-    name: "setPresaleReserved",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "bool", name: "_presaleWhiteListRequired", type: "bool" },
-    ],
-    name: "setPresaleWhiteListRequired",
+    inputs: [{ internalType: "uint16", name: "_mintCount", type: "uint16" }],
+    name: "setMintCount",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -433,7 +397,7 @@ export const contractAbi = [
   },
   {
     inputs: [],
-    name: "unpausePreSale",
+    name: "unpauseFreeCalim",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -456,4 +420,4 @@ export const contractAbi = [
 // export const contractAddress = "0xD73eE48F78da0B851892A60772acC9d0218374FE";
 // export const contractAddress = "0x25A0d5147BaF36D6DE8d85EA461162810870Dd74";
 // export const contractAddress = "0x2fAa2119D73EfCB2C1Db677843F0cD48b269D97a";
-export const contractAddress = "0x6ACf4FDC54281441b7C0dD736301AC83fd5F6160";
+export const contractAddress = "0xa204B3A1F55a61Fec4D85bA763345E5D0893C124";
