@@ -119,15 +119,6 @@ export const contractAbi = [
   },
   {
     inputs: [
-      { internalType: "address[]", name: "addresses", type: "address[]" },
-    ],
-    name: "addToPresale",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       { internalType: "address[]", name: "_recipients", type: "address[]" },
     ],
     name: "airdrop",
@@ -157,13 +148,6 @@ export const contractAbi = [
     name: "burnUnsold",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "addr", type: "address" }],
-    name: "checkPresaleEligiblity",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -248,7 +232,7 @@ export const contractAbi = [
   },
   {
     inputs: [],
-    name: "pauseFreeCalim",
+    name: "pauseFreeClaim",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -397,7 +381,7 @@ export const contractAbi = [
   },
   {
     inputs: [],
-    name: "unpauseFreeCalim",
+    name: "unpauseFreeClaim",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -420,4 +404,4 @@ export const contractAbi = [
 // export const contractAddress = "0xD73eE48F78da0B851892A60772acC9d0218374FE";
 // export const contractAddress = "0x25A0d5147BaF36D6DE8d85EA461162810870Dd74";
 // export const contractAddress = "0x2fAa2119D73EfCB2C1Db677843F0cD48b269D97a";
-export const contractAddress = "0xa204B3A1F55a61Fec4D85bA763345E5D0893C124";
+export const contractAddress = "0xA600Cd70d7c0362b99B33a4599d414221A69581f";
